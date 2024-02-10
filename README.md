@@ -1,6 +1,6 @@
-# POC Q&A System with Langchain and OpenAI
+# POC AWS Sagenaker Documentation Q&A System with Langchain and OpenAI
 
-This project implements a Proof of Concept (PoC) for a Question & Answer (Q&A) system using Langchain for text processing and OpenAI for language models. The system allows users to input questions and retrieves answers from a collection of documents.
+This project implements a Proof of Concept (PoC) for a Question & Answer (Q&A) system using Langchain for text processing and OpenAI for language models. The system allows users to input questions and retrieves answers from a collection of documents of AWS Sagemaker documentation.
 
 ## Overview
 
@@ -27,7 +27,7 @@ The Q&A system is built using Python and leverages the Langchain library for tex
     pip install -r requirements.txt
     ```
 
-3. Set up your OpenAI API key by creating a `.env` file in the project directory and adding your API key:
+3. Set up your OpenAI API key by creating a `.streamlit` folder in the project directory with a file inside called `secrets.toml`. Then add your API key:
 
     ```
     OPENAI_API_KEY=your_openai_api_key_here
@@ -38,4 +38,7 @@ The Q&A system is built using Python and leverages the Langchain library for tex
 To run the Q&A system, execute the following command:
 
 ```bash
+virtualenv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 streamlit run src/qa_main.py
