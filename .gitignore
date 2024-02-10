@@ -160,5 +160,7 @@ cython_debug/
 #.idea/
 
 #ChromaDB
-chromadb
+chromadb/
 
+#Streamlit Secrets
+.streamlit/

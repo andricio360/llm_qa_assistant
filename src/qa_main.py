@@ -24,7 +24,7 @@ from dotenv import find_dotenv, load_dotenv
 
 _ = load_dotenv(find_dotenv())  # read local .env file
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 
 class QASystem:
