@@ -1,4 +1,4 @@
-# POC AWS Sagenaker Documentation Q&A System with Langchain and OpenAI
+# POC AWS Sagemaker Documentation Q&A System with Langchain and OpenAI
 
 This project implements a Proof of Concept (PoC) for a Question & Answer (Q&A) system using Langchain for text processing and OpenAI for language models. The system allows users to input questions and retrieves answers from a collection of documents of AWS Sagemaker documentation.
 
