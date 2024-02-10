@@ -14,7 +14,7 @@ from langchain.text_splitter import (
     MarkdownHeaderTextSplitter,
     RecursiveCharacterTextSplitter,
 )
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_openai import OpenAIEmbeddings
 
@@ -33,7 +33,7 @@ class QASystem:
     def __init__(self) -> None:
         """Initialize QASystem."""
         self.markdown_folder: str = "./data/"
-        self.persist_directory: str = "docs/chromadb/"
+        #self.persit_directory: str = "docs/chromadb/"
         self.llm_name: str = "gpt-3.5-turbo"
         self.temperature: int = 0
         self.openai_api_key: str = openai.api_key
@@ -62,7 +62,7 @@ class QASystem:
         self.vectordb = Chroma.from_documents(
             documents=self.splits,
             embedding=self.embedding,
-            persist_directory=self.persist_directory,
+            #persist_directory=self.persist_directory,
         )
 
     def create_llm_model(self) -> None:
