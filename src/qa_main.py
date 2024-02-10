@@ -98,7 +98,7 @@ class QASystemApp:
     def run_streamlit_app(self) -> None:
         """Run Streamlit app."""
         self.qa_system.build_qa_chain()
-        st.title("Q&A System with Langchain and OpenAI")
+        st.title("AWS Sagemaker Documentation Q&A Assistant")
         question = st.text_input("Enter your question here:")
         if st.button("Get Answer"):
             result = self.qa_system.qa_chain({"query": question})
