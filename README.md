@@ -2,6 +2,30 @@
 
 This project implements a Proof of Concept (PoC) for a Question & Answer (Q&A) system using Langchain for text processing and OpenAI for language models. The system allows users to input questions and retrieves answers from a collection of documents of AWS Sagemaker documentation.
 
+## PoC Architecture
+This PoC is implemented to deploy using streamlit following this basic architecture
+
+<img width="407" alt="image" src="https://github.com/andricio360/llm_qa_assistant/assets/54078516/b92d85f0-64b3-4e04-a15d-d582a274ab3f">
+
+## Final Deployment Architecture
+The final system will be hosted in AWS using AWS services such as Sagemaker, API Gateway, Lambda, etc. This is the overall architecture of the final solution:
+
+<img width="641" alt="image" src="https://github.com/andricio360/llm_qa_assistant/assets/54078516/c3a7675a-5784-4a92-b564-ada13ce36dc7">
+
+## Process Diagram
+The following is the process diagram of the system functionality:
+
+<img width="529" alt="image" src="https://github.com/andricio360/llm_qa_assistant/assets/54078516/b696af37-4712-4db0-b6a9-bd77fc7bb994">
+
+### Step by Step explanation:
+
+- Markdown documents are loaded into the data folder.
+- Those documents are ingested using langchain and splitted into chunks.
+- Those chunks are transformed into embeddings and saved into a Vector DB
+- When the question arrives, it is transformed into embedding and compared with similar documents inside VectorDB
+- The query and similar documents are joined into a single "prompt" as context and asks an OpenAI model to generate a response
+- The final answer is then deployed into the streamlit app where the user can ask the questions and retrieve the answers from the documentation.
+
 ## Overview
 
 The Q&A system is built using Python and leverages the Langchain library for text processing tasks such as document splitting and vectorization. It utilizes OpenAI's language models for generating answers to user queries.
