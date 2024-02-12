@@ -41,7 +41,7 @@ class QASystem:
         self.temperature: int = 0
         self.openai_api_key: str = openai.api_key
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1500, chunk_overlap=150
+            chunk_size=600, chunk_overlap=20
         )
         self.embedding = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
         self.docs: List[str] = []
