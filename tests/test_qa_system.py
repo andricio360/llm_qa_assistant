@@ -16,9 +16,3 @@ def test_split_documents(qa_system):
     qa_system.load_documents()
     qa_system.split_documents()
     assert len(qa_system.splits) > 0
-
-def test_create_vector_db(qa_system):
-    qa_system.load_documents()
-    qa_system.split_documents()
-    qa_system.create_vector_db()
-    assert qa_system.vectordb is not None

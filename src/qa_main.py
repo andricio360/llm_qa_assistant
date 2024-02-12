@@ -36,11 +36,9 @@ class QASystem:
         #self.persit_directory: str = "docs/chromadb/"
         self.llm_name: str = "gpt-3.5-turbo"
         self.temperature: int = 0
-        self.openai_api_key: str = openai.api_key
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1500, chunk_overlap=150
         )
-        self.embedding = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
         self.docs: List[str] = []
         self.vectordb = None
         self.llm = None
@@ -61,7 +59,7 @@ class QASystem:
         """Create vector database."""
         self.vectordb = Chroma.from_documents(
             documents=self.splits,
-            embedding=self.embedding,
+            embedding=OpenAIEmbeddings(openai_api_key=openai.api_key),
             #persist_directory=self.persist_directory,
         )
 
@@ -70,7 +68,7 @@ class QASystem:
         self.llm = ChatOpenAI(
             model_name=self.llm_name,
             temperature=self.temperature,
-            openai_api_key=self.openai_api_key,
+            openai_api_key=openai.api_key,
         )
 
     def retrieve_documents(self) -> None:
