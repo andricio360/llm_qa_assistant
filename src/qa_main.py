@@ -18,6 +18,8 @@ from langchain.prompts import PromptTemplate
 from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_openai import OpenAIEmbeddings
+from loguru import logger
+
 
 sys.path.append("../..")
 
@@ -121,12 +123,14 @@ class QASystemApp:
         st.title("AWS Sagemaker Documentation Q&A Assistant 👩‍💻")
         question = st.text_input("Enter your question here:")
         if st.button("Get Answer"):
+            logger.info(question)
             result = self.qa_system.qa_chain({"query": question})
             answer = result["result"]
+            logger.info(answer)
             st.write("Answer:", answer)
             docs = self.qa_system.vectordb.similarity_search(question,k=3)
             source_documents = str(list(set([d.metadata.get('source') for d in docs]))[0])
-            source_documents = source_documents
+            logger.info(source_documents)
             st.write("Source Documents:", source_documents)
 
 
