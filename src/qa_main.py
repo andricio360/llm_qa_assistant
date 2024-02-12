@@ -124,6 +124,10 @@ class QASystemApp:
             result = self.qa_system.qa_chain({"query": question})
             answer = result["result"]
             st.write("Answer:", answer)
+            docs = self.qa_system.vectordb.similarity_search(question,k=3)
+            source_documents = str(list(set([d.metadata.get('source') for d in docs]))[0])
+            source_documents = source_documents
+            st.write("Source Documents:", source_documents)
 
 
 if __name__ == "__main__":
