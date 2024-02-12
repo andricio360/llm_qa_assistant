@@ -14,6 +14,7 @@ from langchain.text_splitter import (
     MarkdownHeaderTextSplitter,
     RecursiveCharacterTextSplitter,
 )
+from langchain.prompts import PromptTemplate
 from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_openai import OpenAIEmbeddings
@@ -79,14 +80,33 @@ class QASystem:
             self.llm, retriever=self.vectordb.as_retriever()
         )
 
+    def create_qa_chain(self, prompt) -> None:
+        """Create Q&A Chain"""
+        self.qa_chain = RetrievalQA.from_chain_type(
+            self.llm,
+            retriever=self.vectordb.as_retriever(),
+            return_source_documents = True,
+            chain_type_kwargs={"prompt":prompt}
+        )
+
+    def build_qa_chain_prompt(self)-> None:
+        """Build prompt for OpenAI LLM and save it into class attributes."""
+        template = """Use the following pieces of context to answer the question at the end./n
+        If you don't know the answer, just say you don't know, don't try to make up an answer./n
+        Keep the answer as concise as possible. Always say 'Is anything else I can help you?'/n
+        at the end of the answer./n
+        {context}
+        Question: {question}
+        Answer:"""
+        return PromptTemplate(template = template, input_variables=["context", "question"])
+
     def build_qa_chain(self) -> None:
         """Build Q&A chain."""
         self.load_documents()
         self.split_documents()
         self.create_vector_db()
         self.create_llm_model()
-        self.retrieve_documents()
-
+        self.create_qa_chain(self.build_qa_chain_prompt())
 
 class QASystemApp:
     """Q&A System application."""
