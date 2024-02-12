@@ -24,9 +24,6 @@ from dotenv import find_dotenv, load_dotenv
 
 _ = load_dotenv(find_dotenv())  # read local .env file
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
-
-
 class QASystem:
     """Q&A System class."""
 
@@ -43,6 +40,7 @@ class QASystem:
         self.vectordb = None
         self.llm = None
         self.qa_chain = None
+        self.openai_api_key = st.secrets["OPENAI_API_KEY"]
 
     def load_documents(self) -> None:
         """Load documents from markdown files."""
@@ -59,7 +57,7 @@ class QASystem:
         """Create vector database."""
         self.vectordb = Chroma.from_documents(
             documents=self.splits,
-            embedding=OpenAIEmbeddings(openai_api_key=openai.api_key),
+            embedding=OpenAIEmbeddings(openai_api_key=self.openai_api_key),
             #persist_directory=self.persist_directory,
         )
 
@@ -68,7 +66,7 @@ class QASystem:
         self.llm = ChatOpenAI(
             model_name=self.llm_name,
             temperature=self.temperature,
-            openai_api_key=openai.api_key,
+            openai_api_key=self.openai_api_key,
         )
 
     def retrieve_documents(self) -> None:
