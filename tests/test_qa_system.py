@@ -1,11 +1,16 @@
 import pytest
 import sys
-
+import os
+from streamlit.testing.v1 import AppTest
 sys.path.append(".")
 from src.qa_main import QASystem
 
 @pytest.fixture
 def qa_system():
+    at = AppTest.from_file("src/qa_main.py", default_timeout=1000)
+    at.secrets["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
+    at.run()
+    print(at.main)
     return QASystem()
 
 def test_load_documents(qa_system):
