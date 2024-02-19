@@ -44,14 +44,19 @@ The Q&A system is built using Python and leverages the Langchain library for tex
     ```bash
     git clone https://github.com/andricio360/llm_qa_assistant.git
     ```
+2. Switch to the branch where you'll find the latest changes:
 
-2. Install dependencies using pip:
+    ```bash
+    git switch develop_source_documents
+    ```
+
+3. Install dependencies using pip:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-3. Set up your OpenAI API key by creating a `.streamlit` folder in the project directory with a file inside called `secrets.toml`. Then add your API key:
+4. Set up your OpenAI API key by creating a `.streamlit` folder in the project directory with a file inside called `secrets.toml`. Then add your API key:
 
     ```
     OPENAI_API_KEY=your_openai_api_key_here
@@ -66,3 +71,9 @@ virtualenv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 streamlit run src/qa_main.py
+```
+
+## Example
+
+![Captura de Pantalla 2024-02-18 a la(s) 8 23 41 p  m](https://github.com/andricio360/llm_qa_assistant/assets/54078516/2e71d0a5-f0b3-492d-98cb-f8d8e1cac8a8)
+
